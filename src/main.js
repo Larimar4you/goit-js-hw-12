@@ -1,18 +1,19 @@
-import { fetchImages } from './pixabay-api.js';
-import {
-  renderGallery,
-  clearGallery,
-  showLoadMoreButton,
-  hideLoadMoreButton,
-  showLoader,
-  hideLoader,
-} from './render-functions.js';
+// Описаний у документації
 import SimpleLightbox from 'simplelightbox';
+// Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
+// npm install simplelightbox
+
+// Імпортуємо функції
+import { fetchImages } from './js/pixabay-api';
+import { renderGallery } from './js/render-functions';
+import { showNotification } from './js/render-functions';
+import { smoothScroll } from './js/render-functions';
 
 const form = document.querySelector('.form');
 const input = document.querySelector('.input');
 const loadMoreBtn = document.querySelector('.load-more');
+
 let page = 1;
 let query = '';
 const perPage = 40;
