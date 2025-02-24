@@ -10,19 +10,21 @@
   <body>
 
     <main class="container">
-      <form class ="form">
+      <form class="form">
         <label> 
-          <input type="text" name="query" class="input" autocomplete="off" value="search git quickimages.." required/>
-
+          <input type="text" name="query" class="input" autocomplete="off" placeholder="Search images..." required />
         </label> 
-          <button type="submit">Search</button> 
-        </form> 
-  
-        <div class="loader">Loading...</div>  
+        <button type="submit">Search</button> 
+      </form> 
 
-        <div class="gallery"></div>
-      </form>
+      <div class="loader">Loading...</div>  
+
+      <div class="gallery"></div>
+
+      <button class="load-more" style="display: none;">Load more</button>
     </main>
+
     <script type="module" src="./main.js"></script>
   </body>
 </html>
+
