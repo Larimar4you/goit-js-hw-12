@@ -59,6 +59,7 @@ function resetSearch() {
     return;
   }
 
+  console.log('gallery:', gallery);
   clearGallery(gallery);
   hideLoadMoreButton();
 }
