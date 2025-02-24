@@ -66,11 +66,8 @@ export function smoothScroll() {
   });
 }
 
-export function showLoader(loaderElement = document.querySelector('.loader')) {
-  if (!loaderElement) {
-    console.error("❌ Ошибка: элемент '.loader' не найден!");
-    return;
-  }
+// Функция показа лоадера
+export function showLoader(loaderElement) {
   loaderElement.style.display = 'block';
 }
 
