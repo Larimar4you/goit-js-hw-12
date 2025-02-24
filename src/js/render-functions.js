@@ -65,3 +65,13 @@ export function smoothScroll() {
     behavior: 'smooth',
   });
 }
+
+// Функция показа лоадера
+export function showLoader(loaderElement) {
+  loaderElement.style.display = 'block';
+}
+
+// Функция скрытия лоадера
+export function hideLoader(loaderElement) {
+  loaderElement.style.display = 'none';
+}
