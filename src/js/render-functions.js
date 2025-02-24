@@ -36,6 +36,11 @@ export function renderGallery(images, galleryElement) {
   galleryElement.insertAdjacentHTML('beforeend', markup);
 }
 
+// Функция очистки галереи
+export function clearGallery(galleryElement) {
+  galleryElement.innerHTML = '';
+}
+
 // Функция отображения уведомлений
 export function showNotification(message, position = 'topRight') {
   try {
