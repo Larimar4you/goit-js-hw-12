@@ -1,89 +1,103 @@
-// Описаний у документації
 import SimpleLightbox from 'simplelightbox';
-// Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
-// npm install simplelightbox
-
-// Імпортуємо функції
 import { fetchImages } from './js/pixabay-api';
-import { renderGallery } from './js/render-functions';
-import { showNotification } from './js/render-functions';
-import { smoothScroll } from './js/render-functions';
+import {
+  renderGallery,
+  clearGallery,
+  showNotification,
+  smoothScroll,
+  showLoader,
+  hideLoader,
+} from './js/render-functions';
+
+let query = '';
+let page = 1;
+let totalHits = 0;
 
 const form = document.querySelector('.form');
-const input = document.querySelector('.input');
+const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
+const loader = document.querySelector('.loader');
 
-let page = 1;
-let query = '';
-const perPage = 40;
-let lightbox = new SimpleLightbox('.gallery a');
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
-form.addEventListener('submit', async event => {
+form.addEventListener('submit', handleFormSubmit);
+loadMoreBtn.addEventListener('click', loadMoreImages);
+
+function handleFormSubmit(event) {
   event.preventDefault();
-  query = input.value.trim();
+  query = event.currentTarget.elements.query.value.trim();
+
   if (!query) return;
 
+  resetSearch();
+  searchImages();
+}
+
+function resetSearch() {
   page = 1;
+  totalHits = 0;
   clearGallery();
   hideLoadMoreButton();
+}
+
+function loadMoreImages() {
+  page++;
+  searchImages();
+}
+
+async function searchImages() {
   showLoader();
 
   try {
-    const data = await fetchImages(query, page, perPage);
-    if (data.hits.length === 0) {
-      alert('No images found. Try another query!');
-      hideLoader();
+    const { hits: images, totalHits: total } = await fetchImages(query, page);
+
+    handleSearchResults(images, total);
+  } catch (error) {
+    showNotification('Failed to load images. Please try again later.');
+  } finally {
+    hideLoader();
+  }
+}
+
+function handleSearchResults(images, total) {
+  if (page === 1) {
+    totalHits = total;
+
+    if (!totalHits) {
+      showNotification(
+        'Sorry, there are no images matching your search query. Please try again!'
+      );
       return;
     }
-
-    renderGallery(data.hits);
-    lightbox.refresh();
-    hideLoader();
-
-    if (data.totalHits > perPage) {
-      showLoadMoreButton();
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Something went wrong. Please try again.');
-    hideLoader();
   }
-});
 
-loadMoreBtn.addEventListener('click', async () => {
-  page += 1;
-  hideLoadMoreButton();
-  showLoader();
+  renderGallery(images, gallery);
+  lightbox.refresh();
 
-  try {
-    const data = await fetchImages(query, page, perPage);
-    renderGallery(data.hits);
-    lightbox.refresh();
-    hideLoader();
+  toggleLoadMoreButton(images);
+  if (page > 1) smoothScroll();
+}
 
-    const totalPages = Math.ceil(data.totalHits / perPage);
-    if (page >= totalPages) {
-      hideLoadMoreButton();
-      alert("We're sorry, but you've reached the end of search results.");
-    } else {
-      showLoadMoreButton();
-    }
+function toggleLoadMoreButton(images) {
+  const isMoreAvailable = images.length === 40 && page * 40 < totalHits;
 
-    scrollPage();
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Something went wrong. Please try again.');
-    hideLoader();
+  loadMoreBtn.style.display = isMoreAvailable ? 'block' : 'none';
+
+  if (!isMoreAvailable && page * 40 >= totalHits) {
+    showNotification(
+      "We're sorry, but you've reached the end of search results."
+    );
   }
-});
+}
 
-function scrollPage() {
-  const cardHeight = document
-    .querySelector('.gallery_item')
-    .getBoundingClientRect().height;
-  window.scrollBy({
-    top: cardHeight * 2,
-    behavior: 'smooth',
-  });
+function showLoadMoreButton() {
+  loadMoreBtn.style.display = 'block';
+}
+
+function hideLoadMoreButton() {
+  loadMoreBtn.style.display = 'none';
 }
