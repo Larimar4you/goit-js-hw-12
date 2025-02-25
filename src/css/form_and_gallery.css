@@ -17,10 +17,13 @@
   border-radius: 4px;
   width: 272px;
   border: 1px solid #808080;
-  transition: border 0.3s;
 }
 
 .input::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
   color: #808080;
 }
 
@@ -30,7 +33,6 @@
 
 .input:focus {
   border: 1px solid #4e75ff;
-  outline: none;
 }
 
 button {
@@ -44,13 +46,21 @@ button {
   line-height: 1.5;
   letter-spacing: 0.04em;
   color: #fff;
-  border: none;
   cursor: pointer;
-  transition: background 0.3s;
+  border: none;
 }
 
 button:hover {
   background: #6c8cff;
+}
+
+a {
+  width: 370px;
+}
+
+img {
+  height: 200px;
+  width: 360px;
 }
 
 .loader {
@@ -61,34 +71,41 @@ button:hover {
 .loader.visible {
   display: block;
 }
+
 .gallery {
   margin-top: 32px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 колонки */
-  gap: 24px;
+  grid-template-columns: repeat(3, 360px); /* 3 колонки по 360px */
+  gap: 24px; /* Отступы между изображениями */
+  padding: 20px;
+  max-width: 1128px; /* Фиксированная ширина контейнера */
+  margin-left: auto;
+  margin-right: auto;
   justify-content: center;
 }
 
 .gallery_item {
+  display: flex;
+  width: 360px; /* Фиксированная ширина */
+  height: 200px; /* Фиксированная высота */
   border: 1px solid #808080;
   overflow: hidden;
 }
 
 .gallery_image {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: cover; /* Картинки обрезаются по нужному размеру */
 }
 
-
 .info {
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-top: 1px solid #ddd;
   background-color: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  gap: 28px;
-  padding: 10px;
+  gap: 20px;
 }
 
 .info-item {
@@ -96,14 +113,6 @@ button:hover {
   flex-direction: column;
 }
 
-@media (max-width: 1024px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшетах */
-  }
-}
-
-@media (max-width: 600px) {
-  .gallery {
-    grid-template-columns: repeat(1, 1fr); /* 1 колонка на телефонах */
-  }
+.load-more {
+  margin: 30px auto;
 }
