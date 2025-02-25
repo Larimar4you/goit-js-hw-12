@@ -1,3 +1,4 @@
+
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { fetchImages } from './js/pixabay-api';
@@ -14,34 +15,22 @@ let query = '';
 let page = 1;
 let totalHits = 0;
 
-// Проверяем, что элементы найдены
 const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 const loader = document.querySelector('.loader');
-
-if (!gallery) {
-  console.error("❌ Ошибка: Элемент '.gallery' не найден!");
-}
-
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
 
-form?.addEventListener('submit', handleFormSubmit);
-loadMoreBtn?.addEventListener('click', loadMoreImages);
+form.addEventListener('submit', handleFormSubmit);
+loadMoreBtn.addEventListener('click', loadMoreImages);
 
 function handleFormSubmit(event) {
   event.preventDefault();
+  query = event.currentTarget.elements.query.value.trim();
 
-  const searchInput = event.currentTarget.elements.query;
-  if (!searchInput) {
-    console.error('❌ Поле ввода не найдено!');
-    return;
-  }
-
-  query = searchInput.value.trim();
   if (!query) return;
 
   resetSearch();
@@ -51,15 +40,6 @@ function handleFormSubmit(event) {
 function resetSearch() {
   page = 1;
   totalHits = 0;
-
-  if (!gallery) {
-    console.error(
-      '❌ Ошибка: Невозможно очистить, так как gallery = undefined.'
-    );
-    return;
-  }
-
-  console.log('gallery:', gallery);
   clearGallery(gallery);
   hideLoadMoreButton();
 }
@@ -74,6 +54,7 @@ async function searchImages() {
 
   try {
     const { hits: images, totalHits: total } = await fetchImages(query, page);
+
     handleSearchResults(images, total);
   } catch (error) {
     showNotification('Failed to load images. Please try again later.');
@@ -102,9 +83,8 @@ function handleSearchResults(images, total) {
 }
 
 function toggleLoadMoreButton(images) {
-  if (!loadMoreBtn) return;
-
   const isMoreAvailable = images.length === 40 && page * 40 < totalHits;
+
   loadMoreBtn.style.display = isMoreAvailable ? 'block' : 'none';
 
   if (!isMoreAvailable && page * 40 >= totalHits) {
@@ -114,8 +94,10 @@ function toggleLoadMoreButton(images) {
   }
 }
 
+function showLoadMoreButton() {
+  loadMoreBtn.style.display = 'block';
+}
+
 function hideLoadMoreButton() {
-  if (loadMoreBtn) {
-    loadMoreBtn.style.display = 'none';
-  }
+  loadMoreBtn.style.display = 'none';
 }
