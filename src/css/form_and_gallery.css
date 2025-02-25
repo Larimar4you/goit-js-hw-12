@@ -65,37 +65,33 @@ button:hover {
 .gallery {
   margin-top: 32px;
   display: grid;
-  grid-template-columns: repeat(3, 360px); /* 3 колонки по 360px */
-  gap: 24px; /* Отступы между изображениями */
-  padding: 20px;
-  max-width: 1128px; /* Фиксированная ширина контейнера */
-  margin-left: auto;
-  margin-right: auto;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Адаптивная сетка */
+  gap: 24px;
   justify-content: center;
 }
 
 .gallery_item {
-  display: flex;
-  width: 360px; /* Фиксированная ширина */
-  height: 200px; /* Фиксированная высота */
   border: 1px solid #808080;
-  overflow: hidden;
+  width: 100%; 
+  max-width: 360px; /* Ограничение максимальной ширины */
 }
 
 .gallery_image {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* Картинки обрезаются по нужному размеру */
+  height: 250px;
+  object-fit: cover;
 }
 
+
+
 .info {
-  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid #ddd;
   background-color: rgba(0, 0, 0, 0.6);
-  gap: 20px;
+  color: #fff;
+  gap: 28px;
+  padding: 10px;
 }
 
 .info-item {
@@ -103,7 +99,14 @@ button:hover {
   flex-direction: column;
 }
 
-.load-more {
-  margin: 30px auto;
+@media (max-width: 1024px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшетах */
+  }
 }
 
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: repeat(1, 1fr); /* 1 колонка на телефонах */
+  }
+}
