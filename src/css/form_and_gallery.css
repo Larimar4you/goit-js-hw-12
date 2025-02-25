@@ -63,24 +63,30 @@ button:hover {
 }
 
 .gallery {
-  margin-top: 32px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Адаптивная сетка */
-  gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 24px; /* Отступы между изображениями */
+  max-width: 1128px;
+  margin: 0 auto; /* Центрирование галереи */
 }
 
 .gallery_item {
+  width: 360px;
+  height: 200px;
+  overflow: hidden;
   border: 1px solid #808080;
-  width: 100%; 
-  max-width: 360px; /* Ограничение максимальной ширины */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .gallery_image {
   width: 100%;
-  height: 250px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: cover; /* Подгоняет изображение под размеры */
 }
+
 
 
 
