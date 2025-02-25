@@ -1,4 +1,3 @@
-// Импорт iziToast для уведомлений
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
@@ -67,11 +66,19 @@ export function smoothScroll() {
 }
 
 // Функция показа лоадера
-export function showLoader(loaderElement) {
+export function showLoader(loaderElement = document.querySelector('.loader')) {
+  if (!loaderElement) {
+    console.error("❌ Ошибка: элемент '.loader' не найден!");
+    return;
+  }
   loaderElement.style.display = 'block';
 }
 
 // Функция скрытия лоадера
-export function hideLoader(loaderElement) {
+export function hideLoader(loaderElement = document.querySelector('.loader')) {
+  if (!loaderElement) {
+    console.error("❌ Ошибка: элемент '.loader' не найден!");
+    return;
+  }
   loaderElement.style.display = 'none';
 }

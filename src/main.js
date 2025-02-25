@@ -1,4 +1,3 @@
-
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { fetchImages } from './js/pixabay-api';
@@ -16,9 +15,10 @@ let page = 1;
 let totalHits = 0;
 
 const form = document.querySelector('.form');
-const gallery = document.querySelector('.gallery');
+const gallery = document.querySelector('.gallery'); // ✅ Перенёс выше!
 const loadMoreBtn = document.querySelector('.load-more');
 const loader = document.querySelector('.loader');
+
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
@@ -33,15 +33,13 @@ function handleFormSubmit(event) {
 
   if (!query) return;
 
+  page = 1; // ✅ Сбрасываем страницу при новом поиске
   resetSearch();
   searchImages();
 }
 
 function resetSearch() {
-  page = 1;
-  totalHits = 0;
-  clearGallery(gallery);
-  hideLoadMoreButton();
+  gallery.innerHTML = ''; // ✅ Убрали ненужный аргумент
 }
 
 function loadMoreImages() {
@@ -50,7 +48,7 @@ function loadMoreImages() {
 }
 
 async function searchImages() {
-  showLoader();
+  showLoader(loader); // ✅ Передали loader
 
   try {
     const { hits: images, totalHits: total } = await fetchImages(query, page);
@@ -59,7 +57,7 @@ async function searchImages() {
   } catch (error) {
     showNotification('Failed to load images. Please try again later.');
   } finally {
-    hideLoader();
+    hideLoader(loader); // ✅ Передали loader
   }
 }
 
@@ -92,12 +90,4 @@ function toggleLoadMoreButton(images) {
       "We're sorry, but you've reached the end of search results."
     );
   }
-}
-
-function showLoadMoreButton() {
-  loadMoreBtn.style.display = 'block';
-}
-
-function hideLoadMoreButton() {
-  loadMoreBtn.style.display = 'none';
 }
