@@ -64,37 +64,29 @@ button:hover {
 
 .gallery {
   margin-top: 32px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  /* gap: 24px; */
-
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  grid-template-columns: repeat(3, 360px); /* 3 колонки по 360px */
+  gap: 24px; /* Отступы между изображениями */
   padding: 20px;
-  max-width: 1200px;
-
+  max-width: 1128px; /* Фиксированная ширина контейнера */
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
 }
-
 
 .gallery_item {
   display: flex;
+  width: 360px; /* Фиксированная ширина */
+  height: 200px; /* Фиксированная высота */
   border: 1px solid #808080;
-  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; */
+  overflow: hidden;
 }
 
 .gallery_image {
-  height: 250px;
-    /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Картинки обрезаются по нужному размеру */
 }
-/* .gallery_image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px #808080;
-} */
 
 .info {
   padding: 10px;
@@ -103,9 +95,7 @@ button:hover {
   justify-content: center;
   border-top: 1px solid #ddd;
   background-color: rgba(0, 0, 0, 0.6);
-  /* color: #fff; */
   gap: 20px;
-
 }
 
 .info-item {
@@ -113,18 +103,7 @@ button:hover {
   flex-direction: column;
 }
 
-
 .load-more {
   margin: 30px auto;
 }
-@media (max-width: 1024px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшетах */
-  }
-}
 
-@media (max-width: 600px) {
-  .gallery {
-    grid-template-columns: repeat(1, 1fr); /* 1 колонка на телефонах */
-  }
-}
