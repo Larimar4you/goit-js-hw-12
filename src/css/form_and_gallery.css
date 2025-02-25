@@ -61,17 +61,19 @@ button:hover {
 .loader.visible {
   display: block;
 }
+
 .gallery {
   margin-top: 32px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Адаптивная сетка */
   gap: 24px;
   justify-content: center;
 }
 
 .gallery_item {
   border: 1px solid #808080;
-  overflow: hidden;
+  width: 100%; 
+  max-width: 360px; /* Ограничение максимальной ширины */
 }
 
 .gallery_image {
@@ -79,6 +81,7 @@ button:hover {
   height: 250px;
   object-fit: cover;
 }
+
 
 
 .info {
