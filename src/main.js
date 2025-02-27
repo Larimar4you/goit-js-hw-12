@@ -13,6 +13,7 @@ import {
 let query = '';
 let page = 1;
 let totalHits = 0;
+const perPage = 40;
 
 const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery'); 
@@ -34,30 +35,36 @@ function handleFormSubmit(event) {
   if (!query) return;
 
   page = 1;
+  totalHits = 0;
   resetSearch();
+  loadMoreBtn.style.display = 'none';
   searchImages();
 }
 
 function resetSearch() {
-  gallery.innerHTML = ''; 
+  clearGallery(gallery);
 }
 
 function loadMoreImages() {
   page++;
+  showLoader();
   searchImages();
 }
 
-async function searchImages() {
-  showLoader(loader); 
-
+async function searchImages() { 
   try {
-    const { hits: images, totalHits: total } = await fetchImages(query, page);
+    const { hits: images, totalHits: total } = await fetchImages(
+      query,
+      page,
+      perPage
+    );
 
     handleSearchResults(images, total);
   } catch (error) {
     showNotification('Failed to load images. Please try again later.');
   } finally {
-    hideLoader(loader); 
+    hideLoader(loader);
+    toggleLoadMoreButton(); 
   }
 }
 
@@ -81,13 +88,23 @@ function handleSearchResults(images, total) {
 }
 
 function toggleLoadMoreButton(images) {
-  const isMoreAvailable = images.length === 40 && page * 40 < totalHits;
-
-  loadMoreBtn.style.display = isMoreAvailable ? 'block' : 'none';
-
-  if (!isMoreAvailable && page * 40 >= totalHits) {
-    showNotification(
-      "We're sorry, but you've reached the end of search results."
-    );
+  const isMoreAvailable =
+    images && images.length === perPage && page * perPage < totalHits;
+  if (isMoreAvailable) {
+    loadMoreBtn.style.display = 'block';
+    loadMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'end' }); //
+  } else {
+    loadMoreBtn.style.display = 'none';
+    if (page * perPage >= totalHits) {
+      showNotification(
+        "We're sorry, but you've reached the end of search results."
+      );
+    }
   }
+}
+function showLoader() {
+  loader.style.display = 'block';
+}
+function hideLoader() {
+  loader.style.display = 'none';
 }
