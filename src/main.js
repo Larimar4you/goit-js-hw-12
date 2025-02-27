@@ -16,7 +16,7 @@ let totalHits = 0;
 const perPage = 40;
 
 const form = document.querySelector('.form');
-const gallery = document.querySelector('.gallery'); 
+const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 const loader = document.querySelector('.loader');
 
@@ -47,11 +47,11 @@ function resetSearch() {
 
 function loadMoreImages() {
   page++;
-  showLoader();
+  showLoader(loader);
   searchImages();
 }
 
-async function searchImages() { 
+async function searchImages() {
   try {
     const { hits: images, totalHits: total } = await fetchImages(
       query,
@@ -64,7 +64,7 @@ async function searchImages() {
     showNotification('Failed to load images. Please try again later.');
   } finally {
     hideLoader(loader);
-    toggleLoadMoreButton(); 
+    toggleLoadMoreButton();
   }
 }
 
@@ -92,7 +92,7 @@ function toggleLoadMoreButton(images) {
     images && images.length === perPage && page * perPage < totalHits;
   if (isMoreAvailable) {
     loadMoreBtn.style.display = 'block';
-    loadMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'end' }); //
+    loadMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'end' });
   } else {
     loadMoreBtn.style.display = 'none';
     if (page * perPage >= totalHits) {
@@ -101,10 +101,4 @@ function toggleLoadMoreButton(images) {
       );
     }
   }
-}
-function showLoader() {
-  loader.style.display = 'block';
-}
-function hideLoader() {
-  loader.style.display = 'none';
 }

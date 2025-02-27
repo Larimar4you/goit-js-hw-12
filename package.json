@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "css-loader": "^7.1.2",
     "eslint": "^9.21.0",
     "glob": "^11.0.0",
     "postcss": "^8.4.41",
