@@ -72,7 +72,7 @@ async function searchImages() {
   }
 }
 
-function handleSearchResults(images, total) {
+function handleSearchResults(images, total, isLoadMore) {
   if (page === 1) {
     totalHits = total;
 
@@ -88,7 +88,6 @@ function handleSearchResults(images, total) {
   lightbox.refresh();
 
   checkLoadMoreButton(images);
-  if (isLoadMore) smoothScroll();
 }
 
 function checkLoadMoreButton(images) {
