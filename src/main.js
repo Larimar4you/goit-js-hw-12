@@ -42,12 +42,20 @@ function resetSearch() {
   page = 1;
   totalHits = 0;
   gallery.innerHTML = '';
-  toggleLoadMoreButton(false);
+  loadMoreBtn.style.display = 'none';
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
 }
 
 function loadMoreImages() {
   page++;
   searchImages();
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
 }
 
 async function searchImages() {
