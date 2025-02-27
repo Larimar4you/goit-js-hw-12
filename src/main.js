@@ -72,7 +72,7 @@ async function searchImages() {
   }
 }
 
-function handleSearchResults(images, total, isLoadMore) {
+function handleSearchResults(images, total) {
   if (page === 1) {
     totalHits = total;
 
