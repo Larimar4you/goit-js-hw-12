@@ -14,7 +14,7 @@ import {
 let query = '';
 let page = 1;
 let totalHits = 0;
-const perPage = 15; // Число изображений на страницу
+const perPage = 40;
 
 const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
@@ -50,14 +50,10 @@ function resetSearch() {
 
 function loadMoreImages() {
   page++;
-  searchImages();
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
+  searchImages(true);
 }
 
-async function searchImages() {
+async function searchImages(isLoadMore) {
   showLoader();
   toggleLoadMoreButton(false);
 
@@ -67,7 +63,7 @@ async function searchImages() {
       page,
       perPage
     );
-    handleSearchResults(images, total);
+    handleSearchResults(images, total, isLoadMore);
   } catch (error) {
     showNotification('Failed to load images. Please try again later.');
   } finally {
@@ -75,7 +71,7 @@ async function searchImages() {
   }
 }
 
-function handleSearchResults(images, total) {
+function handleSearchResults(images, total, isLoadMore) {
   if (page === 1) {
     totalHits = total;
 
@@ -91,7 +87,7 @@ function handleSearchResults(images, total) {
   lightbox.refresh();
 
   checkLoadMoreButton(images);
-  if (page > 1) smoothScroll();
+  if (isLoadMore) smoothScroll();
 }
 
 function checkLoadMoreButton(images) {
