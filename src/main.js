@@ -15,7 +15,7 @@ let page = 1;
 let totalHits = 0;
 
 const form = document.querySelector('.form');
-const gallery = document.querySelector('.gallery'); // ✅ Перенёс выше!
+const gallery = document.querySelector('.gallery'); 
 const loadMoreBtn = document.querySelector('.load-more');
 const loader = document.querySelector('.loader');
 
@@ -33,13 +33,13 @@ function handleFormSubmit(event) {
 
   if (!query) return;
 
-  page = 1; // ✅ Сбрасываем страницу при новом поиске
+  page = 1;
   resetSearch();
   searchImages();
 }
 
 function resetSearch() {
-  gallery.innerHTML = ''; // ✅ Убрали ненужный аргумент
+  gallery.innerHTML = ''; 
 }
 
 function loadMoreImages() {
@@ -48,7 +48,7 @@ function loadMoreImages() {
 }
 
 async function searchImages() {
-  showLoader(loader); // ✅ Передали loader
+  showLoader(loader); 
 
   try {
     const { hits: images, totalHits: total } = await fetchImages(query, page);
@@ -57,7 +57,7 @@ async function searchImages() {
   } catch (error) {
     showNotification('Failed to load images. Please try again later.');
   } finally {
-    hideLoader(loader); // ✅ Передали loader
+    hideLoader(loader); 
   }
 }
 
