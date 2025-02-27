@@ -50,10 +50,11 @@ function resetSearch() {
 
 function loadMoreImages() {
   page++;
-  searchImages(true);
+  searchImages();
+  smoothScroll();
 }
 
-async function searchImages(isLoadMore) {
+async function searchImages() {
   showLoader();
   toggleLoadMoreButton(false);
 
@@ -63,7 +64,7 @@ async function searchImages(isLoadMore) {
       page,
       perPage
     );
-    handleSearchResults(images, total, isLoadMore);
+    handleSearchResults(images, total);
   } catch (error) {
     showNotification('Failed to load images. Please try again later.');
   } finally {
