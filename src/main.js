@@ -34,7 +34,11 @@ function handleFormSubmit(event) {
 
   if (!query) return;
 
+  page = 1;
+  totalHits = 0;
+
   resetSearch();
+  loadMoreBtn.style.display = 'none';
   searchImages();
 }
 
@@ -42,11 +46,6 @@ function resetSearch() {
   page = 1;
   totalHits = 0;
   gallery.innerHTML = '';
-  loadMoreBtn.style.display = 'none';
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
 }
 
 function loadMoreImages() {
