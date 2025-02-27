@@ -1,7 +1,6 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-// Функция рендеринга галереи
 export function renderGallery(images, galleryElement) {
   if (!images || images.length === 0) {
     showNotification('No images found!');
@@ -19,28 +18,22 @@ export function renderGallery(images, galleryElement) {
         comments,
         downloads,
       }) => `
-      <a class="gallery-item" href="${largeImageURL}" data-title="${tags}">
-        <img src="${webformatURL}" alt="${tags}" loading="lazy"/>
-        <div class="info">
-          <p><b>Likes:</b> ${likes}</p>
-          <p><b>Views:</b> ${views}</p>
-          <p><b>Comments:</b> ${comments}</p>
-          <p><b>Downloads:</b> ${downloads}</p>
-        </div>
-      </a>
-    `
+    <a class="gallery-item" href="${largeImageURL}" data-title="${tags}">
+      <img src="${webformatURL}" alt="${tags}" loading="lazy"/>
+      <div class="info">
+        <p><b>Likes:</b> ${likes}</p>
+        <p><b>Views:</b> ${views}</p>
+        <p><b>Comments:</b> ${comments}</p>
+        <p><b>Downloads:</b> ${downloads}</p>
+      </div>
+    </a>
+  `
     )
     .join('');
 
   galleryElement.insertAdjacentHTML('beforeend', markup);
 }
 
-// Функция очистки галереи
-export function clearGallery(galleryElement) {
-  galleryElement.innerHTML = '';
-}
-
-// Функция отображения уведомлений
 export function showNotification(message, position = 'topRight') {
   try {
     iziToast.show({
@@ -53,7 +46,6 @@ export function showNotification(message, position = 'topRight') {
   }
 }
 
-// Функция плавного скролла
 export function smoothScroll() {
   const card = document.querySelector('.gallery-item');
   if (!card) return;
@@ -65,20 +57,21 @@ export function smoothScroll() {
   });
 }
 
-// Функция показа лоадера
-export function showLoader(loaderElement = document.querySelector('.loader')) {
-  if (!loaderElement) {
-    console.error("❌ Ошибка: элемент '.loader' не найден!");
-    return;
-  }
-  loaderElement.style.display = 'block';
+export function showLoader() {
+  const loader = document.querySelector('.loader');
+  if (loader) loader.style.display = 'block';
 }
 
-// Функция скрытия лоадера
-export function hideLoader(loaderElement = document.querySelector('.loader')) {
-  if (!loaderElement) {
-    console.error("❌ Ошибка: элемент '.loader' не найден!");
-    return;
-  }
-  loaderElement.style.display = 'none';
+export function hideLoader() {
+  const loader = document.querySelector('.loader');
+  if (loader) loader.style.display = 'none';
+}
+
+export function toggleLoadMoreButton(isVisible) {
+  const loadMoreBtn = document.querySelector('.load-more');
+  if (!loadMoreBtn) return;
+
+  loadMoreBtn.style.display = isVisible ? 'block' : 'none';
+  if (isVisible)
+    loadMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'end' });
 }

@@ -1,24 +1,24 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+
 import { fetchImages } from './js/pixabay-api';
 import {
   renderGallery,
-  clearGallery,
   showNotification,
   smoothScroll,
   showLoader,
   hideLoader,
+  toggleLoadMoreButton,
 } from './js/render-functions';
 
 let query = '';
 let page = 1;
 let totalHits = 0;
-const perPage = 40;
+const perPage = 15; // Число изображений на страницу
 
 const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
-const loader = document.querySelector('.loader');
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
@@ -34,37 +34,37 @@ function handleFormSubmit(event) {
 
   if (!query) return;
 
-  page = 1;
-  totalHits = 0;
   resetSearch();
-  loadMoreBtn.style.display = 'none';
   searchImages();
 }
 
 function resetSearch() {
-  clearGallery(gallery);
+  page = 1;
+  totalHits = 0;
+  gallery.innerHTML = '';
+  toggleLoadMoreButton(false);
 }
 
 function loadMoreImages() {
   page++;
-  showLoader(loader);
   searchImages();
 }
 
 async function searchImages() {
+  showLoader();
+  toggleLoadMoreButton(false);
+
   try {
     const { hits: images, totalHits: total } = await fetchImages(
       query,
       page,
       perPage
     );
-
     handleSearchResults(images, total);
   } catch (error) {
     showNotification('Failed to load images. Please try again later.');
   } finally {
-    hideLoader(loader);
-    toggleLoadMoreButton();
+    hideLoader();
   }
 }
 
@@ -83,22 +83,18 @@ function handleSearchResults(images, total) {
   renderGallery(images, gallery);
   lightbox.refresh();
 
-  toggleLoadMoreButton(images);
+  checkLoadMoreButton(images);
   if (page > 1) smoothScroll();
 }
 
-function toggleLoadMoreButton(images) {
+function checkLoadMoreButton(images) {
   const isMoreAvailable =
-    images && images.length === perPage && page * perPage < totalHits;
-  if (isMoreAvailable) {
-    loadMoreBtn.style.display = 'block';
-    loadMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  } else {
-    loadMoreBtn.style.display = 'none';
-    if (page * perPage >= totalHits) {
-      showNotification(
-        "We're sorry, but you've reached the end of search results."
-      );
-    }
+    images.length === perPage && page * perPage < totalHits;
+  toggleLoadMoreButton(isMoreAvailable);
+
+  if (!isMoreAvailable && page * perPage >= totalHits) {
+    showNotification(
+      "We're sorry, but you've reached the end of search results."
+    );
   }
 }
