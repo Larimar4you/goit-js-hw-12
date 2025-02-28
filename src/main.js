@@ -51,7 +51,6 @@ function resetSearch() {
 function loadMoreImages() {
   page++;
   searchImages();
-  smoothScroll();
 }
 
 async function searchImages() {
@@ -88,6 +87,8 @@ function handleSearchResults(images, total) {
   lightbox.refresh();
 
   checkLoadMoreButton(images);
+
+  if (page > 1) smoothScroll();
 }
 
 function checkLoadMoreButton(images) {
