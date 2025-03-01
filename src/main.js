@@ -50,7 +50,7 @@ function resetSearch() {
 
 function loadMoreImages() {
   page++;
-  searchImages();
+  searchImages(event);
 }
 
 async function searchImages() {
@@ -88,7 +88,7 @@ function handleSearchResults(images, total) {
 
   checkLoadMoreButton(images);
 
-  if (page > 1 && event?.type === 'click') smoothScroll();
+  if (page > 1 && event instanceof MouseEvent) smoothScroll();
 }
 
 function checkLoadMoreButton(images) {
