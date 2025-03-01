@@ -5,7 +5,6 @@
   justify-content: center;
   margin-top: 36px;
 }
-
 .input {
   font-weight: 400;
   font-size: 16px;
@@ -31,7 +30,8 @@
   background: #fff;
 }
 
-.input:focus {
+.input:active,
+.input:active {
   border: 1px solid #4e75ff;
 }
 
@@ -46,8 +46,6 @@ button {
   line-height: 1.5;
   letter-spacing: 0.04em;
   color: #fff;
-  cursor: pointer;
-  border: none;
 }
 
 button:hover {
@@ -57,10 +55,9 @@ button:hover {
 a {
   width: 370px;
 }
-
 img {
-  height: 200px;
-  width: 360px;
+  height: 220px;
+  width: 370px;
 }
 
 .loader {
@@ -74,29 +71,35 @@ img {
 
 .gallery {
   margin-top: 32px;
-  display: grid;
-  grid-template-columns: repeat(3, 360px); 
-  gap: 24px; 
-  padding: 20px;
-  max-width: 1128px; 
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  /* gap: 24px; */
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 20px;
+  max-width: 1200px;
 }
 
 .gallery_item {
   display: flex;
-  width: 360px; 
-  height: 200px;
   border: 1px solid #808080;
-  overflow: hidden;
+  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; */
 }
 
 .gallery_image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 250px;
+  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; */
 }
+/* .gallery_image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px #808080;
+} */
 
 .info {
   padding: 10px;
@@ -105,6 +108,7 @@ img {
   justify-content: center;
   border-top: 1px solid #ddd;
   background-color: rgba(0, 0, 0, 0.6);
+  /* color: #fff; */
   gap: 20px;
 }
 
