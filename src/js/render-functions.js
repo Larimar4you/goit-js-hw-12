@@ -51,6 +51,7 @@ export function smoothScroll() {
   if (!card) return;
 
   const { height: cardHeight } = card.getBoundingClientRect();
+
   window.scrollBy({
     top: cardHeight * 2,
     behavior: 'smooth',
