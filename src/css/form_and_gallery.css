@@ -8,13 +8,14 @@
 .input {
   font-weight: 400;
   font-size: 16px;
+  /* line-height: 24px; */
   line-height: 1.5;
   letter-spacing: 0.04em;
-  color: #2e2f42;
+  color: #808080;
   padding: 8px;
   height: 40px;
-  border-radius: 4px;
   width: 272px;
+  border-radius: 4px;
   border: 1px solid #808080;
 }
 
@@ -32,15 +33,15 @@
 
 .input:active,
 .input:active {
-  border: 1px solid #4eb8ff;
+  border: 1px solid #4e75ff;
 }
 
 button {
   font-family: 'Montserrat', sans-serif;
   border-radius: 8px;
-  padding: 8px 12px;
+  padding: 8px 16px;
   min-width: 91px;
-  background: #4eff92;
+  background: #4e75ff;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
@@ -53,11 +54,11 @@ button:hover {
 }
 
 a {
-  width: 370px;
+  width: 360px;
 }
 img {
-  height: 220px;
-  width: 370px;
+  height: 200px;
+  width: 360px;
 }
 
 .loader {
@@ -71,14 +72,15 @@ img {
 
 .gallery {
   margin-top: 32px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
   padding: 20px;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  justify-content: center;
 }
 
 .gallery_item {
