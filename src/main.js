@@ -19,13 +19,16 @@ const perPage = 40;
 const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
+const loader = document.querySelector('.loader');
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
 
+// слухач для форми
 form.addEventListener('submit', handleFormSubmit);
+
 loadMoreBtn.addEventListener('click', loadMoreImages);
 
 function handleFormSubmit(event) {
@@ -34,18 +37,15 @@ function handleFormSubmit(event) {
 
   if (!query) return;
 
-  page = 1;
-  totalHits = 0;
-
   resetSearch();
-  loadMoreBtn.style.display = 'none';
   searchImages();
 }
 
 function resetSearch() {
   page = 1;
   totalHits = 0;
-  gallery.innerHTML = '';
+  gallery.innerHTML = ''; // очищуем галерею
+  loadMoreBtn.style.display = 'none';
 }
 
 function loadMoreImages() {
@@ -55,7 +55,6 @@ function loadMoreImages() {
 
 async function searchImages() {
   showLoader();
-  toggleLoadMoreButton(false);
 
   try {
     const { hits: images, totalHits: total } = await fetchImages(
@@ -71,6 +70,7 @@ async function searchImages() {
   }
 }
 
+//обробка рез пошуку
 function handleSearchResults(images, total) {
   if (page === 1) {
     totalHits = total;
@@ -87,8 +87,7 @@ function handleSearchResults(images, total) {
   lightbox.refresh();
 
   checkLoadMoreButton(images);
-
-  if (page > 1 && event instanceof MouseEvent) smoothScroll();
+  if (page > 1) smoothScroll();
 }
 
 function checkLoadMoreButton(images) {
@@ -101,4 +100,12 @@ function checkLoadMoreButton(images) {
       "We're sorry, but you've reached the end of search results."
     );
   }
+}
+
+function showLoader() {
+  loader.style.display = 'block';
+}
+
+function hideLoader() {
+  loader.style.display = 'none';
 }

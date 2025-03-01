@@ -75,10 +75,10 @@ img {
 .gallery {
   margin-top: 32px;
   display: grid;
-  grid-template-columns: repeat(3, 360px); /* 3 колонки по 360px */
-  gap: 24px; /* Отступы между изображениями */
+  grid-template-columns: repeat(3, 360px); 
+  gap: 24px; 
   padding: 20px;
-  max-width: 1128px; /* Фиксированная ширина контейнера */
+  max-width: 1128px; 
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
@@ -86,8 +86,8 @@ img {
 
 .gallery_item {
   display: flex;
-  width: 360px; /* Фиксированная ширина */
-  height: 200px; /* Фиксированная высота */
+  width: 360px; 
+  height: 200px;
   border: 1px solid #808080;
   overflow: hidden;
 }
@@ -95,7 +95,7 @@ img {
 .gallery_image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Картинки обрезаются по нужному размеру */
+  object-fit: cover;
 }
 
 .info {
