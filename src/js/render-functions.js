@@ -70,4 +70,5 @@ export function hideLoader() {
 export function toggleLoadMoreButton(isVisible) {
   const loadMoreBtn = document.querySelector('.load-more');
   if (!loadMoreBtn) return;
+  loadMoreBtn.style.display = isVisible ? 'block' : 'none';
 }
