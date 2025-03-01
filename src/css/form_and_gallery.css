@@ -97,8 +97,12 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid #ddd;
-  background-color: rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #808080;
+  width: 360px;
+  height: 48px;
+  background-color: #fff;
   gap: 20px;
 }
 
