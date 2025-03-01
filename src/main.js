@@ -101,11 +101,3 @@ function checkLoadMoreButton(images) {
     );
   }
 }
-
-function showLoader() {
-  loader.style.display = 'block';
-}
-
-function hideLoader() {
-  loader.style.display = 'none';
-}
