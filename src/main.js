@@ -88,7 +88,7 @@ function handleSearchResults(images, total) {
 
   checkLoadMoreButton(images);
 
-  if (page > 1) smoothScroll();
+  if (page > 1 && event?.type === 'click') smoothScroll();
 }
 
 function checkLoadMoreButton(images) {
