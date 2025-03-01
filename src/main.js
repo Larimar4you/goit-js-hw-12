@@ -50,7 +50,7 @@ function resetSearch() {
 
 function loadMoreImages() {
   page++;
-  searchImages(event);
+  searchImages();
 }
 
 async function searchImages() {
