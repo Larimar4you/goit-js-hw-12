@@ -32,78 +32,7 @@
 
 .input:active,
 .input:active {
-  border: 1px solid #4e75ff;
-}
-
-button {
-  font-family: 'Montserrat', sans-serif;
-  border-radius: 8px;
-  padding: 8px 12px;
-  min-width: 91px;
-  background: #4eff92;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  color: #fff;
-}
-
-button:hover {
-  background: #6c8cff;
-}
-
-a {
-  width: 370px;
-}
-img {
-  height: 220px;
-  width: 370px;
-}
-
-.loader {
-  display: none;
-  text-align: center;
-}
-
-.loader.visible {
-  display: block;
-}
-
-.form {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 36px;
-}
-.input {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  color: #2e2f42;
-  padding: 8px;
-  height: 40px;
-  border-radius: 4px;
-  width: 272px;
-  border: 1px solid #808080;
-}
-
-.input::placeholder {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  color: #808080;
-}
-
-.input:hover {
-  background: #fff;
-}
-
-.input:active,
-.input:active {
-  border: 1px solid #4e75ff;
+  border: 1px solid #4eb8ff;
 }
 
 button {
@@ -142,31 +71,19 @@ img {
 
 .gallery {
   margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
   padding: 20px;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
 }
 
 .gallery_item {
   display: flex;
-  border: 1px solid #808080;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.load-more {
-  margin: 30px auto;
-  display: block;
 }
 
 .gallery_image {
@@ -187,4 +104,8 @@ img {
 .info-item {
   display: flex;
   flex-direction: column;
+}
+
+.load-more {
+  margin: 30px auto;
 }
