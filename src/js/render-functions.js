@@ -57,21 +57,4 @@ export function smoothScroll() {
   });
 }
 
-export function showLoader() {
-  const loader = document.querySelector('.loader');
-  if (loader) loader.style.display = 'block';
-}
 
-export function hideLoader() {
-  const loader = document.querySelector('.loader');
-  if (loader) loader.style.display = 'none';
-}
-
-export function toggleLoadMoreButton(isVisible) {
-  const loadMoreBtn = document.querySelector('.load-more');
-  if (!loadMoreBtn) return;
-
-  loadMoreBtn.style.display = isVisible ? 'block' : 'none';
-  if (isVisible)
-    loadMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'end' });
-}
